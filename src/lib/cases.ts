@@ -7,6 +7,9 @@ export type CaseFile = {
   year: string;
   client: string;
   role: string;
+  website?: string;
+  pdfResearch?: string;
+  pdfUI?: string;
   tags: string[];
   summary: string;
   timeline: { phase: string; note: string }[];
@@ -24,12 +27,14 @@ export const cases: CaseFile[] = [
 {
   slug: "saarthi",
   no: "001",
-  title: "Saarthi",
+  title: "Untangling Government Office Chaos",
   kicker: "Public Service UX Research",
   status: "Case Closed",
   year: "2026",
   client: "Academic Design Project",
   role: "UX Researcher & Product Designer",
+  pdfResearch: "/case-studies/saarthi-research.pdf",
+  pdfUI: "/case-studies/saarthi-ui.pdf",
 
   tags: [
     "UX Research",
@@ -152,6 +157,7 @@ export const cases: CaseFile[] = [
     year: "2026",
     client: "Academic Design Project",
     role: "UX Researcher & Interaction Designer",
+    pdfResearch: "/case-studies/paytm chatbot.pdf",
     
     tags: [
       "Conversational UX",
@@ -280,6 +286,7 @@ export const cases: CaseFile[] = [
     year: "2025",
     client: "Academic Research Project",
     role: "UX Researcher",
+    pdfResearch: "/case-studies/comparative UX.pdf",
     tags: [
       "UX Research",
       "Behavioural Design",
@@ -407,6 +414,7 @@ export const cases: CaseFile[] = [
   year: "2026",
   client: "Academic Information Design Project",
   role: "Information Designer & UX Designer",
+  website: "https://birds-of-gujarat.framer.website/",
 
   tags: [
     "Information Design",

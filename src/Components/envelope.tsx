@@ -1,6 +1,9 @@
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useState } from "react";
-import sealAsset from "/public/Seal.png";
+<img
+  src="/seal.png"
+  alt="Wax Seal"
+/>;
 
 const easeApple = [0.22, 1, 0.36, 1] as const;
 
@@ -128,7 +131,7 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
 
             {/* Postmark ring */}
             <div
-              className="absolute bottom-5 right-6 w-16 h-16 rounded-full border border-ink-soft/40 flex items-center justify-center rotate-[-8deg] opacity-60"
+              className="absolute bottom-5 right-6 w-24 h-24 rounded-full border border-ink-soft/40 flex items-center justify-center rotate-[-8deg] opacity-60"
               aria-hidden
             >
               <div className="type-typewriter text-[7px] uppercase tracking-[0.25em] text-ink-soft text-center leading-tight">
@@ -172,7 +175,7 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
               initial={false}
               animate={{ rotateX: flapOpen ? -165 : 0 }}
               transition={{ duration: 0.8, ease: easeApple }}
-              className="absolute left-0 right-0 top-0 origin-top pointer-events-none"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-3"
               style={{
                 aspectRatio: "1 / 0.31",
                 transformStyle: "preserve-3d",
@@ -201,11 +204,12 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
 
             {/* Wax seal — anchored at flap tip */}
             <div
-              className="absolute left-1/2 -translate-x-1/2"
+              className="absolute left-1/2"
               style={{
-                top: "calc(31% - 53px)",
-                width: 106,
-                height: 106,
+                top: "51%)",
+                transform: "translate(-50%,60%)",
+                width: 150,
+                height: 150,
                 zIndex: 5,
                 pointerEvents: stage === "back" ? "auto" : "none",
               }}

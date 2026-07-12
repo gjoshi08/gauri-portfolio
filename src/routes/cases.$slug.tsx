@@ -163,6 +163,41 @@ function CaseDetail() {
         </Section>
 
         <Section label="VIII · Final Verdict" title="Case closed.">
+          <div className="flex flex-wrap gap-4 mt-8">
+
+  {c.pdfResearch && (
+    <a
+      href={c.pdfResearch}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 rounded-md border border-[#7C1D1D] bg-[#F7F2EA] px-5 py-3 text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#7C1D1D] hover:text-[#F7F2EA]"
+    >
+      🗃️ Research Investigation File
+    </a>
+  )}
+
+  {c.pdfUI && (
+    <a
+      href={c.pdfUI}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 rounded-md border border-[#7C1D1D] bg-[#F7F2EA] px-5 py-3 text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#7C1D1D] hover:text-[#F7F2EA]"
+    >
+      📱 UI Design Investigation
+    </a>
+  )}
+
+  {c.website && (
+    <a
+      href={c.website}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 rounded-md border border-[#7C1D1D] bg-[#F7F2EA] px-5 py-3 text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#7C1D1D] hover:text-[#F7F2EA]"
+    >
+      🌍 Visit Live Investigation
+    </a>
+  )}
+</div>
           <div className="relative p-10 md:p-14 texture-leather grain rounded-sm">
             <div className="absolute top-6 right-6 stamp" style={{ color: "oklch(0.92 0.03 82)" }}>Case Closed</div>
             <p className="type-serif italic text-2xl md:text-3xl leading-snug text-paper max-w-3xl">
