@@ -204,12 +204,11 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
 
             {/* Wax seal — anchored at flap tip */}
             <div
-              className="absolute left-1/2"
+              className="absolute left-1/2 -translate-x-1/2 top-[31%] md:top-[38%]"
               style={{
                 top: "51%)",
-                transform: "translate(-50%,60%)",
-                width: 150,
-                height: 150,
+                width: "clamp(90px, 18vw, 128px)",
+                height: "clamp(90px, 18vw, 128px)",
                 zIndex: 5,
                 pointerEvents: stage === "back" ? "auto" : "none",
               }}
