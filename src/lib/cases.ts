@@ -7,6 +7,7 @@ export type CaseFile = {
   year: string;
   client: string;
   role: string;
+  collaborators?: string;
   website?: string;
   pdfResearch?: string;
   pdfUI?: string;
@@ -534,5 +535,267 @@ export const cases: CaseFile[] = [
     }
   ]
 }
+,{
+  slug: "human-factors-dining",
+  no: "005",
+  title: "Reimagining Café Experiences Through Human Factors",
+  kicker: "Human Factors • Interaction Design • Group Investigation",
+  status: "Case Closed",
+  year: "2026",
+
+  client: "Academic Group Investigation",
+
+  role:
+    "UX Researcher • Interaction Designer • Team Collaborator",
+  collaborators:
+    "Conducted as a Group Investigation with a multidisciplinary design team.",
+
+  pdfResearch: "/case-studies/human-factors-dining.pdf",
+
+  tags: [
+    "Human Factors",
+    "Interaction Design",
+    "User Research",
+    "Ergonomics",
+    "Collaborative Design",
+    "Experience Design"
+  ],
+
+  summary:
+    "This investigation explored how human factors and ergonomics can transform the café dining experience. Through observational research, behavioral analysis, and collaborative design, the team developed an interactive dining concept that enhances communication, ordering, and shared experiences at the table.",
+
+  timeline: [
+    {
+      phase: "Investigate",
+      note: "Observed user behaviour in cafés and studied dining interactions."
+    },
+    {
+      phase: "Analyze",
+      note: "Synthesized research findings to identify ergonomic and interaction challenges."
+    },
+    {
+      phase: "Concept Development",
+      note: "Generated collaborative concepts for improving the dining experience."
+    },
+    {
+      phase: "Design",
+      note: "Designed interaction flows, interface concepts, and physical touchpoints."
+    },
+    {
+      phase: "Evaluation",
+      note: "Reviewed concepts against human factors principles and usability goals."
+    }
+  ],
+
+  witnesses: [
+    {
+      quote: "Ordering interrupts conversations more than it should.",
+      who: "Café Visitor"
+    },
+    {
+      quote: "Everyone ends up passing menus around the table.",
+      who: "Observation Notes"
+    },
+    {
+      quote: "Technology should support social interaction, not replace it.",
+      who: "Research Insight"
+    }
+  ],
+
+  evidence: [
+    "Contextual Observation",
+    "Human Factors Analysis",
+    "Ergonomic Evaluation",
+    "Collaborative Brainstorming",
+    "Interaction Mapping",
+    "Concept Prototyping"
+  ],
+
+  suspects: [
+    {
+      name: "Fragmented Ordering",
+      detail: "Ordering processes interrupt conversations and reduce engagement."
+    },
+    {
+      name: "Cognitive Overload",
+      detail: "Large menus and multiple decisions overwhelm diners."
+    },
+    {
+      name: "Poor Table Interaction",
+      detail: "Existing dining setups fail to encourage natural collaboration."
+    },
+    {
+      name: "Technology Distraction",
+      detail: "Personal devices often replace meaningful table interactions."
+    }
+  ],
+
+  scene:
+    "Modern cafés have evolved into collaborative social spaces, yet dining interactions remain fragmented and inefficient. The investigation focused on understanding how technology could enhance—not interrupt—shared dining experiences.",
+
+  hypothesis:
+    "Applying human factors principles and interaction design to the dining environment can improve collaboration, reduce cognitive effort, and create a more engaging social experience.",
+
+  experiments: [
+    "Conducted behavioural observations in café environments.",
+    "Mapped collaborative dining interactions.",
+    "Designed ergonomic interaction concepts.",
+    "Developed an interactive tabletop experience.",
+    "Evaluated concepts against usability and accessibility principles."
+  ],
+
+  verdict:
+    "The investigation concluded that thoughtful interaction design can transform ordinary dining into a collaborative experience. By applying human factors, ergonomics, and user-centered design principles, the concept demonstrates how technology can strengthen—not replace—human interaction.",
+
+  metrics: [
+    {
+      label: "Investigation Type",
+      value: "Group"
+    },
+    {
+      label: "Focus",
+      value: "Human Factors"
+    },
+    {
+      label: "Outcome",
+      value: "Interactive Dining"
+    }
+  ]
+},
+{
+  slug: "flicky",
+  no: "006",
+  title: "Reimagining Wearable Interaction Through Smart Nails",
+  kicker: "Future Interaction Design • Wearable Computing • Group Investigation",
+  status: "Case Closed",
+  year: "2025",
+
+  client: "Academic Group Investigation",
+
+  role:
+    "UX Researcher • Interaction Designer • Concept Development",
+
+  collaborators:
+    "Conducted as a Group Investigation with a multidisciplinary design team.",
+
+  pdfResearch: "/case-studies/flicky.pdf",
+
+  tags: [
+    "Interaction Design",
+    "Wearable Computing",
+    "Future Interfaces",
+    "Human Computer Interaction",
+    "Speculative Design",
+    "Prototyping"
+  ],
+
+  summary:
+    "Flicky explores how wearable technology can move beyond smartwatches and rings by transforming fingernails into intelligent interaction surfaces. The concept investigates gesture-based interactions that enable users to control digital devices naturally through subtle hand movements.",
+
+  timeline: [
+    {
+      phase: "Investigate",
+      note: "Researched emerging wearable technologies, gesture interactions and future interface trends."
+    },
+    {
+      phase: "Analyze",
+      note: "Studied user behaviour and limitations of existing wearable devices."
+    },
+    {
+      phase: "Ideate",
+      note: "Generated concepts around smart nails as intuitive interaction devices."
+    },
+    {
+      phase: "Design",
+      note: "Designed interaction scenarios, gesture mappings and product ecosystem."
+    },
+    {
+      phase: "Prototype",
+      note: "Developed concept visuals and validated interaction possibilities."
+    }
+  ],
+
+  witnesses: [
+    {
+      quote:
+        "Technology should feel invisible rather than something we constantly carry.",
+      who: "Research Insight"
+    },
+    {
+      quote:
+        "Simple gestures can replace multiple screen interactions.",
+      who: "Concept Evaluation"
+    },
+    {
+      quote:
+        "Wearables should adapt to people—not the other way around.",
+      who: "Team Discussion"
+    }
+  ],
+
+  evidence: [
+    "Future Trend Analysis",
+    "Wearable Technology Research",
+    "Gesture Mapping",
+    "Interaction Flows",
+    "Concept Development",
+    "Prototype Exploration"
+  ],
+
+  suspects: [
+    {
+      name: "Bulky Wearables",
+      detail:
+        "Existing wearable devices are often intrusive and visually distracting."
+    },
+    {
+      name: "Limited Interaction Methods",
+      detail:
+        "Most wearables rely on tiny screens and repetitive touch inputs."
+    },
+    {
+      name: "Technology Fatigue",
+      detail:
+        "Users manage multiple disconnected devices throughout the day."
+    },
+    {
+      name: "Poor Natural Interaction",
+      detail:
+        "Current interfaces rarely leverage intuitive human gestures."
+    }
+  ],
+
+  scene:
+    "As wearable technology continues to evolve, users demand interactions that are smaller, faster and more natural. This investigation explores smart nails as an alternative interface capable of blending seamlessly into everyday life.",
+
+  hypothesis:
+    "Embedding intelligent interaction capabilities into everyday wearables through gesture-based interfaces can reduce friction, improve accessibility and create more natural human-computer interactions.",
+
+  experiments: [
+    "Explored gesture-based interaction models.",
+    "Designed smart nail interaction scenarios.",
+    "Mapped gestures to digital commands.",
+    "Created future wearable ecosystem concepts.",
+    "Evaluated usability through speculative design principles."
+  ],
+
+  verdict:
+    "Flicky demonstrates how future wearable interfaces can become nearly invisible while enabling intuitive digital interactions. By combining wearable computing, gesture recognition and interaction design, the concept reimagines how people communicate with technology in everyday life.",
+
+  metrics: [
+    {
+      label: "Project Type",
+      value: "Concept Design"
+    },
+    {
+      label: "Primary Focus",
+      value: "Wearable UX"
+    },
+    {
+      label: "Investigation",
+      value: "Group"
+    }
+  ]
+},
 ];
 export const getCase = (slug: string) => cases.find(c => c.slug === slug);
