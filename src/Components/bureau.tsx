@@ -1,7 +1,7 @@
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Search, X, ArrowRight } from "lucide-react";
-import walnutAsset from "@/public/walnut.jfif";
+import deskMat from "../assets/gallery/dark-charcoal-leather-desk-mat.jpg";
 import { useState } from "react";
 
 const easeApple = [0.22, 1, 0.36, 1] as const;
@@ -176,7 +176,7 @@ export function DetectiveDesk() {
       <div
         className="relative w-full aspect-[16/10] rounded-md overflow-hidden shadow-object"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/walnut.jfif)`,
+          backgroundImage: `url(${deskMat})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
