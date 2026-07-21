@@ -71,7 +71,7 @@ function CaseDetail() {
             <div className="stamp">{c.status}</div>
           </div>
           <div className="type-typewriter uppercase text-xs tracking-[0.25em] text-cognac mt-8">{c.kicker}</div>
-          <h1 className="type-serif text-4xl md:text-6xl leading-[1] mt-4 text-ink">{c.title}</h1>
+          <h1 className="type-serif text-5xl md:text-7xl leading-none mt-4 text-ink">{c.title}</h1>
           <p className="type-serif italic text-xl mt-8 text-ink-soft border-l-2 border-gold pl-6 max-w-3xl leading-relaxed">
             {c.summary}
           </p>
@@ -198,16 +198,16 @@ function CaseDetail() {
     </a>
   )}
 </div>
-          <div className="relative p-10 md:p-14 texture-leather grain rounded-sm">
+          <div className="relative p-8 md:p-10 texture-leather grain rounded-sm">
             <div className="absolute top-6 right-6 stamp" style={{ color: "oklch(0.92 0.03 82)" }}>Case Closed</div>
-            <p className="type-serif italic text-2xl md:text-3xl leading-snug text-paper max-w-3xl">
+            <p className="type-serif italic text-lg md:text-xl leading-relaxed text-paper max-w-3xl">
               {c.verdict}
             </p>
             <div className="mt-10 grid sm:grid-cols-3 gap-6 border-t border-paper/20 pt-8">
               {c.metrics.map(m => (
                 <div key={m.label}>
                   <div className="type-typewriter text-[10px] uppercase tracking-widest text-gold">{m.label}</div>
-                  <div className="type-serif text-4xl text-paper mt-2">{m.value}</div>
+                  <div className="type-serif text-3xl text-paper mt-2">{m.value}</div>
                 </div>
               ))}
             </div>

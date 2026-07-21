@@ -68,7 +68,7 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
         {/* Flippable envelope */}
         <motion.div
           animate={{ rotateY: showingBack ? 180 : 0 }}
-          transition={{ duration: 0.7, ease: easeApple }}
+          transition={{ duration: 0.35, ease: easeApple }}
           onClick={handleFlip}
           className="relative"
           style={{
