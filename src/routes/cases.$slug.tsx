@@ -95,13 +95,17 @@ function CaseDetail() {
       </section>
 
       <div className="mx-auto max-w-5xl px-6">
+        <Section
+          label="Case Opening"
+title="Walking into the unknown." children={undefined} >
+    </Section>
         <Section label="I · Investigation Timeline" title="How the case unfolded.">
           <ol className="relative border-l-2 border-ink/20 pl-8 space-y-6">
             {c.timeline.map((t, i) => (
               <li key={i} className="relative">
                 <span className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-wax border-4 border-paper" />
                 <div className="type-typewriter text-[10px] uppercase tracking-widest text-wax">{t.phase}</div>
-                <div className="type-serif text-lg mt-1">{t.note}</div>
+                <div className="type-serif text-lg leading-8 text-ink">{t.note}</div>
               </li>
             ))}
           </ol>
@@ -111,58 +115,201 @@ function CaseDetail() {
           <div className="grid md:grid-cols-3 gap-6">
             {c.witnesses.map((w, i) => (
               <figure key={i} className="p-6 bg-paper-deep/50 border-l-4 border-cognac shadow-paper">
-                <blockquote className="type-serif italic text-lg leading-snug">"{w.quote}"</blockquote>
+                <blockquote className="type-serif italic text-lg leading-8 text-ink">"{w.quote}"</blockquote>
                 <figcaption className="mt-4 type-typewriter text-[11px] uppercase tracking-widest text-ink-soft">— {w.who}</figcaption>
               </figure>
             ))}
           </div>
         </Section>
 
-        <Section label="III · Collected Evidence" title="The research on file.">
-          <ul className="grid sm:grid-cols-2 gap-3">
-            {c.evidence.map((e, i) => (
-              <li key={i} className="flex items-start gap-3 p-4 border border-ink/15">
-                <span className="type-typewriter text-[11px] text-wax mt-1">EX-{String(i + 1).padStart(2, "0")}</span>
-                <span className="type-serif">{e}</span>
-              </li>
-            ))}
-          </ul>
-        </Section>
+        <Section label="III · Evidence Locker" title="The research on file.">
 
-        <Section label="IV · Prime Suspects" title="The pain points, lined up.">
+          <div className="grid sm:grid-cols-2 gap-3">
+
+            {c.evidence.map((e,i)=>(
+
+              <div
+                key={i}
+                className="border border-ink/15 p-6 bg-paper-deep/40 rounded-sm">
+
+                <div className="type-typewriter text-[10px] uppercase tracking-widest text-wax">
+                  Evidence {String(i+1).padStart(2,"0")}
+                </div>
+
+                <h3 className="type-serif text-2xl mt-2">
+                  {e.title}
+                </h3>
+
+                <div className="mt-5 space-y-4">
+
+                  <div>
+                    <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">
+                      Observation
+                    </div>
+                    <p className="type-serif text-lg leading-8 text-ink mt-2">
+  {e.observation}
+</p>
+                  </div>
+
+                  <div>
+                    <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">
+                      Why it mattered
+                    </div>
+                    <p className="type-serif text-lg leading-8 text-ink mt-2">
+  {e.insight}
+</p>
+                  </div>
+
+                  <div>
+                    <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">
+                      Design Decision
+                    </div>
+                    <p className="type-serif text-lg leading-8 text-ink mt-2">
+  {e.decision}
+</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+        </Section>
+        <Section
+label="IV · Breakthrough"
+title="The moment everything changed."
+>
+
+<div className="max-w-4xl">
+
+<p className="type-serif text-lg leading-8 text-ink">
+  {c.breakthrough?.story}
+</p>
+
+<blockquote className="mt-8 border-l-2 border-gold pl-6
+type-serif italic text-xl leading-8 text-ink">
+  "{c.breakthrough?.quote}"
+</blockquote>
+
+</div>
+
+</Section>
+        <Section label="V · Prime Suspects" title="The pain points, lined up.">
           <div className="space-y-4">
             {c.suspects.map((s, i) => (
               <div key={i} className="grid md:grid-cols-[auto_1fr] gap-6 items-start p-6 bg-paper-deep/40 shadow-paper">
                 <div className="type-typewriter text-[11px] uppercase tracking-widest text-wax">Suspect {String(i + 1).padStart(2, "0")}</div>
                 <div>
                   <div className="type-serif text-2xl">{s.name}</div>
-                  <p className="mt-2 text-ink-soft">{s.detail}</p>
+                  <p className="type-serif text-lg leading-8 text-ink mt-3">
+  {s.detail}
+</p>
                 </div>
               </div>
             ))}
           </div>
         </Section>
+        <Section
+label="VI · Pattern Recognition"
+title="Connecting the clues."
+>
 
-        <Section label="V · Crime Scene Analysis" title="The current experience.">
-          <p className="type-serif text-xl leading-relaxed text-ink-soft">{c.scene}</p>
+<div className="grid md:grid-cols-3 gap-6">
+
+{(c.patterns ?? []).map((p, i) => (
+
+<div
+key={i}
+className="p-6 texture-paper shadow-paper">
+
+<h3 className="type-serif text-2xl">
+
+{p.title}
+
+</h3>
+
+<p className="type-serif text-lg leading-relaxed text-ink mt-4">
+  {p.finding}
+</p>
+
+</div>
+
+))}
+
+</div>
+
+</Section>
+
+        <Section label="VII · Crime Scene Analysis" title="The current experience.">
+          <p className="type-serif text-lg leading-8 text-ink">{c.scene}</p>
         </Section>
 
-        <Section label="VI · Hypothesis" title="The theory of the case.">
-          <p className="type-serif italic text-2xl leading-relaxed border-l-2 border-gold pl-6">{c.hypothesis}</p>
+        <Section label="VIII · Working Theory" title=" Working Theory.">
+          <p className="type-serif italic text-lg leading-8 border-l-2 border-gold pl-6">{c.workingTheory}</p>
         </Section>
+        <Section
+label="IX · False Leads"
+title="What the investigation disproved."
+>
 
-        <Section label="VII · Experiments" title="What we tested.">
+<div className="space-y-6">
+
+{(c.falseLeads ?? []).map((f, i) => (
+
+<div
+key={i}
+className="border-l-2 border-cognac pl-6">
+
+<div className="type-serif text-lg text-red-700 leading-8 mt-4">
+
+❌ {f.assumption}
+
+</div>
+
+<div className="type-serif text-lg text-green-700 leading-8 mt-3">
+
+✔ {f.reality}
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
+</Section>
+        <Section label="X · Experiments" title="What we tested.">
           <ul className="space-y-3">
-            {c.experiments.map((e, i) => (
-              <li key={i} className="flex gap-4 p-4 border-b border-ink/15">
-                <span className="type-typewriter text-wax">0{i + 1}</span>
-                <span className="type-serif text-lg">{e}</span>
-              </li>
-            ))}
+            {c.experiments.map((exp,i)=>(
+<div key={i}>
+
+<h3 className="type-serif text-2xl">
+  {exp.title}
+</h3>
+
+<p className="type-serif text-lg leading-relaxed mt-4">
+<strong>Hypothesis:</strong><br/>
+{exp.hypothesis}
+</p>
+
+<p>
+<strong>Result:</strong>
+{exp.result}
+</p>
+
+<p>
+<strong>Decision:</strong>
+{exp.decision}
+</p>
+
+</div>
+))}
           </ul>
         </Section>
-
-        <Section label="VIII · Final Verdict" title="Case closed.">
+        <Section label="XI · Final Verdict" title="Case closed.">
           <div className="flex flex-wrap gap-4 mt-8">
 
   {c.pdfResearch && (
