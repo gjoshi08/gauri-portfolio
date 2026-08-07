@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { BureauNav, BureauFooter } from "@/Components/bureau-chrome";
-import { CheckCircle2, Mic } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Link, Mic } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 
 const easeApple = [0.22, 1, 0.36, 1] as const;
 
@@ -20,9 +21,30 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const [sent, setSent] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen texture-paper grain-fine">
       <BureauNav current="/contact" />
+      <main className="mx-auto max-w-7xl px-6 pt-10">
+
+    <button
+  onClick={() => navigate({ to: "/" })}
+  className="group inline-flex items-center justify-center
+             w-10 h-10
+             rounded-full
+             border border-ink/10
+             bg-paper/80
+             shadow-paper
+             hover:bg-paper
+             transition-all duration-300
+             hover:-translate-x-1"
+  aria-label="Back to Investigator Desk"
+>
+  <ArrowLeft
+    size={18}
+    className="text-ink-soft group-hover:text-wax transition-colors"
+  />
+</button>
 
       <section className="mx-auto max-w-6xl px-6 pt-16 grid md:grid-cols-[1.1fr_1fr] gap-14 items-start">
         <div>
@@ -57,7 +79,7 @@ function Contact() {
         <motion.form
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: easeApple }}
           onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-          className="relative texture-paper grain-fine shadow-paper p-8 md:p-10 rounded-sm"
+          className="relative texture-paper shadow-paper p-8 md:p-10 rounded-sm"
         >
           <div className="absolute top-4 right-4 stamp text-[9px]">AVAILABLE</div>
           <div className="type-typewriter uppercase text-[10px] tracking-[0.3em] text-ink-soft">Case Intake · New Conversation</div>
@@ -93,6 +115,7 @@ function Contact() {
       </section>
 
       <BureauFooter />
+      </main>
     </div>
   );
 }

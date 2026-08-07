@@ -67,7 +67,7 @@ export function CaseFile({ onOpen }: { onOpen: () => void }) {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, ease: easeApple }}
-      className="relative texture-paper grain-fine shadow-paper max-w-2xl w-full p-10 md:p-14 rounded-sm"
+      className="relative texture-paper shadow-paper max-w-2xl w-full p-10 md:p-14 rounded-sm"
       style={{ transform: "rotate(-0.4deg)" }}
     >
       <div className="absolute top-4 left-4 stamp text-[10px]">Confidential</div>
@@ -104,7 +104,7 @@ export function CaseFile({ onOpen }: { onOpen: () => void }) {
         <WaxSeal onBreak={onOpen} />
       </div>
 
-      <div className="pointer-events-none absolute -top-3 left-8 h-6 w-24 bg-paper-deep/70 rotate-[-3deg] shadow-sm" />
+      <div className="pointer-events-none absolute -top-3 left-8 h-6 w-24 bg-paper-deep/70 -rotate-3 shadow-sm" />
       <div className="pointer-events-none absolute -top-2 right-10 h-5 w-20 bg-paper-deep/60 rotate-[4deg] shadow-sm" />
     </motion.div>
   );
@@ -174,7 +174,7 @@ export function DetectiveDesk() {
   return (
     <div className="relative w-full">
       <div
-        className="relative w-full aspect-[16/10] rounded-md overflow-hidden shadow-object"
+        className="relative w-full aspect-16/10 rounded-md overflow-hidden shadow-object"
         style={{
           backgroundImage: `url(${deskMat})`,
           backgroundSize: "cover",
@@ -198,12 +198,12 @@ export function DetectiveDesk() {
           }}
         />
         {/* Fine grain */}
-        <div className="absolute inset-0 pointer-events-none grain-fine opacity-60" />
+        <div className="inset-0 pointer-events-none grain-fine opacity-60" />
 
         {/* ============ CENTER — Large blueprint ============ */}
         <motion.div
           {...fadeIn(0.15)}
-          className="absolute shadow-object grain-fine"
+          className="shadow-object grain-fine"
           style={{
             left: "26%", top: "22%", width: "48%", height: "58%",
             transform: "rotate(-2.5deg)",
@@ -231,7 +231,7 @@ export function DetectiveDesk() {
         {/* Investigation paper overlapping blueprint */}
         <motion.div
           {...fadeIn(0.25)}
-          className="absolute texture-paper grain-fine shadow-object"
+          className="absolute texture-paper shadow-object"
           style={{ left: "42%", top: "40%", width: "22%", height: "26%", transform: "rotate(6deg)" }}
         >
           <div className="p-3 type-typewriter text-[9px] text-ink-soft leading-relaxed">
@@ -245,7 +245,7 @@ export function DetectiveDesk() {
         {/* Small torn note overlapping */}
         <motion.div
           {...fadeIn(0.3)}
-          className="absolute texture-paper grain-fine shadow-object"
+          className="absolute texture-paper shadow-object"
           style={{ left: "34%", top: "62%", width: "16%", height: "16%", transform: "rotate(-8deg)" }}
         >
           <div className="p-2 type-typewriter text-[9px] text-ink-soft">
@@ -349,7 +349,7 @@ export function DetectiveDesk() {
         {/* Leather notebook — About (interactive) */}
         <Interactive nav="about" onSearch={openSearch}
           style={{ right: "3%", top: "34%", width: "20%", height: "26%", transform: "rotate(-5deg)" }}>
-          <div className="relative w-full h-full rounded-sm shadow-object grain-fine"
+          <div className="relative w-full h-full rounded-sm shadow-object"
             style={{
               background: "linear-gradient(135deg, oklch(0.32 0.06 40), oklch(0.2 0.05 35))",
               border: "1px solid oklch(0.12 0.03 35)",
@@ -361,7 +361,7 @@ export function DetectiveDesk() {
               <div className="type-typewriter text-[10px] text-paper/60 mt-1">— Notebook —</div>
             </div>
             {/* elastic band */}
-            <div className="absolute top-0 bottom-0 right-6 w-[3px] bg-ink/60" />
+            <div className="absolute top-0 bottom-0 right-6 w-0.75 bg-ink/60" />
           </div>
         </Interactive>
 
@@ -387,7 +387,7 @@ export function DetectiveDesk() {
         {/* ============ BOTTOM LEFT — voice recorder + papers ============ */}
         {/* Papers */}
         <motion.div {...fadeIn(0.3)}
-          className="absolute texture-paper grain-fine shadow-object"
+          className="absolute texture-paper shadow-object"
           style={{ left: "4%", bottom: "6%", width: "20%", height: "30%", transform: "rotate(-4deg)" }}>
           <div className="p-3 type-typewriter text-[9px] text-ink-soft leading-relaxed">
             <div className="uppercase tracking-widest">Transcript · 07</div>
@@ -400,7 +400,7 @@ export function DetectiveDesk() {
           </div>
         </motion.div>
         <motion.div {...fadeIn(0.35)}
-          className="absolute texture-paper grain-fine shadow-object"
+          className="absolute texture-paper shadow-object"
           style={{ left: "14%", bottom: "10%", width: "16%", height: "22%", transform: "rotate(6deg)" }}>
           <div className="p-2 type-typewriter text-[9px] text-ink-soft">
             <div className="stamp text-[9px] inline-block mb-1">Reviewed</div>
@@ -457,7 +457,7 @@ export function DetectiveDesk() {
             border: "1px solid oklch(0.1 0.02 250)" }}>
           <div className="w-full h-6 rounded-sm mb-1 flex items-center justify-end px-1 type-typewriter text-[9px] text-ink"
             style={{ background: "oklch(0.75 0.09 140)" }}>1,204.50</div>
-          <div className="grid grid-cols-4 gap-[3px]">
+          <div className="grid grid-cols-4 gap-0.75">
             {[...Array(16)].map((_, i) => (
               <div key={i} className="aspect-square rounded-[2px]" style={{ background: "oklch(0.55 0.01 250)" }} />
             ))}
@@ -532,7 +532,7 @@ export function DetectiveDesk() {
               exit={{ y: 10, opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.35, ease: easeApple }}
               onClick={(e) => e.stopPropagation()}
-              className="relative texture-paper grain-fine shadow-paper rounded-sm p-8 w-full max-w-lg"
+              className="texture-paper grain-fine shadow-paper rounded-sm p-8 w-full max-w-lg"
             >
               <button
                 type="button"
@@ -572,7 +572,7 @@ export function EvidenceFolder({
       <motion.article
         whileHover={{ y: -6, rotate: 0 }}
         transition={{ duration: 0.4, ease: easeApple }}
-        className="relative texture-paper grain-fine shadow-paper rounded-sm p-8 h-full"
+        className="texture-paper grain-fine shadow-paper rounded-sm p-8 h-full"
         style={{ transform: "rotate(-0.3deg)" }}
       >
         <div className="absolute -top-3 left-8 h-6 w-32 bg-cognac/70 rounded-sm shadow-sm" />

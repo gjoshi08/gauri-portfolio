@@ -16,7 +16,9 @@ export const Route = createFileRoute("/")({
 
 
 function Home() {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(() => {
+  return sessionStorage.getItem("bureau-opened") === "true";
+});
 
   return (
     <div className="min-h-screen texture-paper grain-fine">
@@ -28,7 +30,10 @@ function Home() {
             transition={{ duration: 0.9, ease: easeApple }}
             className="min-h-screen flex items-center justify-center px-6 py-20"
           >
-            <SealedEnvelope onOpened={() => setOpened(true)} />
+            <SealedEnvelope onOpened={() => {
+    sessionStorage.setItem("bureau-opened", "true");
+    setOpened(true);
+  }} />
           </motion.section>
         ) : (
           <motion.div
@@ -95,7 +100,7 @@ function Home() {
 
             {/* Request Investigation CTA */}
             <section className="mx-auto max-w-7xl px-6 mt-32">
-              <div className="relative texture-leather grain rounded-md p-12 md:p-20 overflow-hidden">
+              <div className="relative texture-leather rounded-md p-12 md:p-20 overflow-hidden">
                 <div className="absolute top-6 right-6 stamp text-[10px]" style={{ color: "oklch(0.92 0.03 82)" }}>
                   Accepting Cases
                 </div>
@@ -104,7 +109,7 @@ function Home() {
                     <div className="type-typewriter uppercase text-[11px] tracking-[0.35em] text-gold">
                       Request Investigation
                     </div>
-                    <h2 className="type-serif text-4xl md:text-6xl mt-4 text-paper leading-[1]">
+                    <h2 className="type-serif text-4xl md:text-6xl mt-4 text-paper leading-none">
                       Need help solving a<br/><span className="italic text-gold">complex user problem?</span>
                     </h2>
                     <p className="mt-6 text-paper/70 max-w-lg leading-relaxed">

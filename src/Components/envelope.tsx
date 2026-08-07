@@ -79,7 +79,7 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
         >
           {/* FRONT of envelope */}
           <div
-            className="absolute inset-0 rounded-sm shadow-object grain-fine"
+            className="absolute inset-0 rounded-sm shadow-object"
             style={{
               backfaceVisibility: "hidden",
               background:
@@ -142,7 +142,7 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
 
           {/* BACK of envelope */}
           <div
-            className="absolute inset-0 rounded-sm shadow-object grain-fine"
+            className="absolute inset-0 rounded-sm shadow-object"
             style={{
               backfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
@@ -183,7 +183,7 @@ export function SealedEnvelope({ onOpened }: { onOpened: () => void }) {
               }}
             >
               <div
-                className="absolute inset-0 grain-fine"
+                className="absolute inset-0"
                 style={{
                   background:
                     "linear-gradient(180deg, oklch(0.955 0.02 84), oklch(0.9 0.03 82))",
