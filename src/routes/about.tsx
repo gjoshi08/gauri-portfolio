@@ -40,11 +40,11 @@ function About() {
       <section className="mx-auto max-w-5xl px-6 pt-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: easeApple }}
-          className="relative texture-paper grain-fine shadow-paper p-10 md:p-16 rounded-sm"
+          className="relative texture-paper grainfine shadow-paper p-10 md:p-16 rounded-sm"
         >
           <div className="absolute top-6 right-6 stamp text-[10px]">DESIGN CLEARANCE</div>
           <div className="grid md:grid-cols-[auto_1fr] gap-10 items-start">
-            <div className="w-40 aspect-[3/4] shadow-object relative overflow-hidden" style={{
+            <div className="w-40 aspect\[3/4] shadow-object relative overflow-hidden" style={{
               background: "linear-gradient(135deg, oklch(0.45 0.05 60), oklch(0.28 0.03 60))",
             }}>
               <div className="absolute inset-3 border border-paper/30" />

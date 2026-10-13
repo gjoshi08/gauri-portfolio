@@ -1,377 +1,357 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { BureauNav, BureauFooter } from "@/Components/bureau-chrome";
-import { getCase, cases, type CaseFile } from "@/lib/cases";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  ExternalLink,
+} from "lucide-react";
+
+import {
+  BureauNav,
+  BureauFooter,
+} from "@/Components/bureau-chrome";
+
+import { cases } from "@/lib/cases";
 
 const easeApple = [0.22, 1, 0.36, 1] as const;
 
 export const Route = createFileRoute("/cases/$slug")({
-  loader: ({ params }): CaseFile => {
-    const c = getCase(params.slug);
-    if (!c) throw notFound();
-    return c;
+  loader: ({ params }) => {
+    const project = cases.find(
+      (item) => item.slug === params.slug
+    );
+
+    if (!project) {
+      throw notFound();
+    }
+
+    return { project };
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData ? [
-      { title: `${loaderData.title} — Case ${loaderData.no}` },
-      { name: "description", content: loaderData.summary },
-      { property: "og:title", content: `${loaderData.title} — DIB` },
-      { property: "og:description", content: loaderData.summary },
-    ] : [{ title: "Case File" }],
-  }),
+
   component: CaseDetail,
-  notFoundComponent: () => (
-    <div className="min-h-screen flex items-center justify-center texture-paper">
-      <div className="text-center">
-        <div className="stamp mb-4">Cold Case</div>
-        <p className="type-typewriter">This file is not in the archive.</p>
-        <Link to="/cases" className="mt-6 inline-block type-typewriter uppercase text-xs tracking-[0.3em] border-b-2 border-gold pb-1">Back to Archive</Link>
-      </div>
-    </div>
-  ),
 });
 
-function Section({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7, ease: easeApple }}
-      className="mt-20"
-    >
-      <div className="type-typewriter uppercase text-[11px] tracking-[0.35em] text-wax">{label}</div>
-      <h2 className="type-serif text-3xl md:text-5xl mt-3 leading-tight text-ink">{title}</h2>
-      <div className="mt-8">{children}</div>
-    </motion.section>
-  );
-}
-
 function CaseDetail() {
-  const c = Route.useLoaderData() as CaseFile;
-  const idx = cases.findIndex(x => x.slug === c.slug);
+  const { project: c } = Route.useLoaderData();
+
+  const idx = cases.findIndex((item) => item.slug === c.slug);
   const next = cases[(idx + 1) % cases.length];
 
   return (
     <div className="min-h-screen texture-paper grain-fine">
       <BureauNav current="/cases" />
 
-      {/* Folder header */}
-      <section className="mx-auto max-w-5xl px-6 pt-16">
-        <Link to="/cases" className="type-typewriter uppercase text-[11px] tracking-[0.3em] text-ink-soft hover:text-wax transition-colors inline-flex items-center gap-2">
-          <ArrowLeft className="h-3 w-3" /> Back to Archive
-        </Link>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: easeApple }}
-          className="relative texture-paper grain-fine shadow-paper mt-6 p-10 md:p-16 rounded-sm"
+      {/* BACK TO ARCHIVE */}
+      <section className="mx-auto max-w-6xl px-6 pt-8 md:pt-6">
+        <Link
+          to="/cases"
+          className="type-typewriter inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-ink-soft transition-colors hover:text-wax"
         >
-          <div className="absolute -top-3 left-16 h-6 w-40 bg-cognac/70 rounded-sm shadow-sm" />
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            <div className="type-typewriter uppercase text-[11px] tracking-[0.3em] text-ink-soft">
-              Case No. {c.no} · Filed {c.year}
-            </div>
-            <div className="stamp">{c.status}</div>
-          </div>
-          <div className="type-typewriter uppercase text-xs tracking-[0.25em] text-cognac mt-8">{c.kicker}</div>
-          <h1 className="type-serif text-5xl md:text-7xl leading-none mt-4 text-ink">{c.title}</h1>
-          <p className="type-serif italic text-xl mt-8 text-ink-soft border-l-2 border-gold pl-6 max-w-3xl leading-relaxed">
-            {c.summary}
-          </p>
-          <div className="mt-10 grid sm:grid-cols-3 gap-6 border-t border-ink/15 pt-6">
-            <div>
-              <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">Client</div>
-              <div className="type-serif mt-1">{c.client}</div>
-            </div>
-            <div>
-              <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">Role</div>
-              <div className="type-serif mt-1">{c.role}</div>
-            </div>
-            <div>
-              <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">Tags</div>
-              <div className="mt-1 flex flex-wrap gap-2">
-                {c.tags.map(t => <span key={t} className="type-typewriter text-[10px] uppercase tracking-widest border border-ink/30 px-2 py-0.5">{t}</span>)}
-              </div>
-            </div>
-          </div>
-        </motion.div>
+          <ArrowLeft className="h-3 w-3" />
+          Back to Archive
+        </Link>
+
+       {/* CASE FILE HERO */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, ease: easeApple }}
+  className="relative texture-paper shadow-paper mt-4 p-3 md:p-4 lg:p-5 rounded-sm"
+>
+  {/* FILE TAB */}
+  <div className="absolute -top-3 left-8 z-10 h-7 w-32 rounded-sm bg-cognac/70 shadow-sm sm:left-12 sm:w-40 md:left-16 md:w-48" />
+
+  {/* CASE HEADER AND TITLE */}
+  <div className="p-6 sm:p-8 md:p-10 lg:p-12">
+    {/* CASE NUMBER + STATUS */}
+    <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-4">
+      <p className="type-typewriter text-[10px] uppercase tracking-[0.2em] text-ink-soft sm:text-[11px] sm:tracking-[0.3em]">
+        Case No. {c.no} · Filed {c.year}
+      </p>
+
+      <div className="stamp shrink-0">{c.status}</div>
+    </div>
+
+    {/* PROJECT CATEGORY */}
+    <p className="type-typewriter uppercase text-xs tracking-[0.25em] text-cognac mt-7">
+      {c.kicker}
+    </p>
+
+    {/* PROJECT TITLE */}
+    <h1 className="type-serif text-4xl md:text-5xl lg:text-6xl leading-[0.95] mt-3 text-ink max-w-5xl">
+      {c.title}
+    </h1>
+
+    {/* PROJECT SUMMARY */}
+    <p className="type-serif italic text-lg md:text-xl mt-5 text-ink-soft border-l-2 border-gold pl-6 max-w-4xl leading-relaxed">
+      {c.summary}
+    </p>
+  </div>
+
+  {/* CLIENT, ROLE AND TAGS */}
+  <div className="grid min-w-0 grid-cols-1 border-t border-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+    {/* CLIENT */}
+    <div className="min-w-0 border-b border-ink/15 px-5 py-3 sm:border-r sm:px-6 md:px-7 lg:border-b-0">
+      <p className="type-typewriter text-[10px] uppercase tracking-[0.15em] text-ink-soft">
+        Client
+      </p>
+
+      <span className="mt-2 inline-block max-w-full break-words border border-ink/25 px-3 py-2 type-typewriter text-[10px] uppercase leading-relaxed tracking-wide text-ink">
+        {c.client}
+      </span>
+    </div>
+
+    {/* ROLE */}
+    <div className="min-w-0 border-b border-ink/15 px-5 py-3 sm:border-b-0 lg:border-r lg:px-8 md:lg:px-10">
+      <p className="type-typewriter text-[10px] uppercase tracking-[0.15em] text-ink-soft">
+        Role
+      </p>
+
+      <span className="mt-2 inline-block max-w-full break-words border border-ink/25 px-3 py-2 type-typewriter text-[10px] uppercase leading-relaxed tracking-wide text-ink">
+        {c.role}
+      </span>
+    </div>
+
+    {/* TAGS */}
+    <div className="min-w-0 px-5 py-3 sm:col-span-2 lg:col-span-1 lg:px-8 md:lg:px-10">
+      <p className="type-typewriter text-[10px] uppercase tracking-[0.15em] text-ink-soft">
+        Tags
+      </p>
+
+      <div className="mt-2 flex flex-wrap gap-2">
+        {c.tags.map((tag) => (
+          <span
+            key={tag}
+            className="max-w-full break-words border border-ink/25 px-2 py-2 type-typewriter text-[9px] uppercase leading-relaxed tracking-wide text-ink"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</motion.div>
       </section>
 
-      <div className="mx-auto max-w-5xl px-6">
-        <Section
-          label="Case Opening"
-title="Walking into the unknown." children={undefined} >
-    </Section>
-        <Section label="I · Investigation Timeline" title="How the case unfolded.">
-          <ol className="relative border-l-2 border-ink/20 pl-8 space-y-6">
-            {c.timeline.map((t, i) => (
-              <li key={i} className="relative">
-                <span className="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-wax border-4 border-paper" />
-                <div className="type-typewriter text-[10px] uppercase tracking-widest text-wax">{t.phase}</div>
-                <div className="type-serif text-lg leading-8 text-ink">{t.note}</div>
-              </li>
-            ))}
-          </ol>
-        </Section>
+      {/* INVESTIGATION */}
+      <section className="mx-auto max-w-6xl px-6 pt-12">
+        {/* SECTION HEADING */}
+        <div>
+          <p className="type-typewriter text-[11px] uppercase tracking-[0.35em] text-wax">
+            The Investigation
+          </p>
 
-        <Section label="II · Witness Statements" title="What users actually said.">
-          <div className="grid md:grid-cols-3 gap-6">
-            {c.witnesses.map((w, i) => (
-              <figure key={i} className="p-6 bg-paper-deep/50 border-l-4 border-cognac shadow-paper">
-                <blockquote className="type-serif italic text-lg leading-8 text-ink">"{w.quote}"</blockquote>
-                <figcaption className="mt-4 type-typewriter text-[11px] uppercase tracking-widest text-ink-soft">— {w.who}</figcaption>
-              </figure>
-            ))}
-          </div>
-        </Section>
+          <h2 className="type-serif mt-3 text-4xl tracking-tight text-ink sm:text-5xl md:text-6xl">
+            What we discovered.
+          </h2>
+        </div>
 
-        <Section label="III · Evidence Locker" title="The research on file.">
-
-          <div className="grid sm:grid-cols-2 gap-3">
-
-            {c.evidence.map((e,i)=>(
-
-              <div
-                key={i}
-                className="border border-ink/15 p-6 bg-paper-deep/40 rounded-sm">
-
-                <div className="type-typewriter text-[10px] uppercase tracking-widest text-wax">
-                  Evidence {String(i+1).padStart(2,"0")}
-                </div>
-
-                <h3 className="type-serif text-2xl mt-2">
-                  {e.title}
-                </h3>
-
-                <div className="mt-5 space-y-4">
-
-                  <div>
-                    <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">
-                      Observation
-                    </div>
-                    <p className="type-serif text-lg leading-8 text-ink mt-2">
-  {e.observation}
-</p>
-                  </div>
-
-                  <div>
-                    <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">
-                      Why it mattered
-                    </div>
-                    <p className="type-serif text-lg leading-8 text-ink mt-2">
-  {e.insight}
-</p>
-                  </div>
-
-                  <div>
-                    <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">
-                      Design Decision
-                    </div>
-                    <p className="type-serif text-lg leading-8 text-ink mt-2">
-  {e.decision}
-</p>
-                  </div>
-
-                </div>
-
-              </div>
-
-            ))}
-
-          </div>
-        </Section>
-        <Section
-label="IV · Breakthrough"
-title="The moment everything changed."
->
-
-<div className="max-w-4xl">
-
-<p className="type-serif text-lg leading-8 text-ink">
-  {c.breakthrough?.story}
-</p>
-
-<blockquote className="mt-8 border-l-2 border-gold pl-6
-type-serif italic text-xl leading-8 text-ink">
-  "{c.breakthrough?.quote}"
-</blockquote>
-
-</div>
-
-</Section>
-        <Section label="V · Prime Suspects" title="The pain points, lined up.">
-          <div className="space-y-4">
-            {c.suspects.map((s, i) => (
-              <div key={i} className="grid md:grid-cols-[auto_1fr] gap-6 items-start p-6 bg-paper-deep/40 shadow-paper">
-                <div className="type-typewriter text-[11px] uppercase tracking-widest text-wax">Suspect {String(i + 1).padStart(2, "0")}</div>
-                <div>
-                  <div className="type-serif text-2xl">{s.name}</div>
-                  <p className="type-serif text-lg leading-8 text-ink mt-3">
-  {s.detail}
-</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
-        <Section
-label="VI · Pattern Recognition"
-title="Connecting the clues."
->
-
-<div className="grid md:grid-cols-3 gap-6">
-
-{(c.patterns ?? []).map((p, i) => (
-
-<div
-key={i}
-className="p-6 texture-paper shadow-paper">
-
-<h3 className="type-serif text-2xl">
-
-{p.title}
-
-</h3>
-
-<p className="type-serif text-lg leading-relaxed text-ink mt-4">
-  {p.finding}
-</p>
-
-</div>
-
-))}
-
-</div>
-
-</Section>
-
-        <Section label="VII · Crime Scene Analysis" title="The current experience.">
-          <p className="type-serif text-lg leading-8 text-ink">{c.scene}</p>
-        </Section>
-
-        <Section label="VIII · Working Theory" title=" Working Theory.">
-          <p className="type-serif italic text-lg leading-8 border-l-2 border-gold pl-6">{c.workingTheory}</p>
-        </Section>
-        <Section
-label="IX · False Leads"
-title="What the investigation disproved."
->
-
-<div className="space-y-6">
-
-{(c.falseLeads ?? []).map((f, i) => (
-
-<div
-key={i}
-className="border-l-2 border-cognac pl-6">
-
-<div className="type-serif text-lg text-red-700 leading-8 mt-4">
-
-❌ {f.assumption}
-
-</div>
-
-<div className="type-serif text-lg text-green-700 leading-8 mt-3">
-
-✔ {f.reality}
-
-</div>
-
-</div>
-
-))}
-
-</div>
-
-</Section>
-        <Section label="X · Experiments" title="What we tested.">
-          <ul className="space-y-3">
-            {c.experiments.map((exp,i)=>(
-<div key={i}>
-
-<h3 className="type-serif text-2xl">
-  {exp.title}
-</h3>
-
-<p className="type-serif text-lg leading-relaxed mt-4">
-<strong>Hypothesis:</strong><br/>
-{exp.hypothesis}
-</p>
-
-<p>
-<strong>Result:</strong>
-{exp.result}
-</p>
-
-<p>
-<strong>Decision:</strong>
-{exp.decision}
-</p>
-
-</div>
-))}
-          </ul>
-        </Section>
-        <Section label="XI · Final Verdict" title="Case closed.">
-          <div className="flex flex-wrap gap-4 mt-8">
-
-  {c.pdfResearch && (
-    <a
-      href={c.pdfResearch}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 rounded-md border border-[#7C1D1D] bg-[#F7F2EA] px-5 py-3 text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#7C1D1D] hover:text-[#F7F2EA]"
+       {/* INVESTIGATION METRICS */}
+<div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+  {(c.metrics ?? []).slice(0, 4).map((metric) => (
+    <div
+      key={metric.label}
+      className="flex min-h-[145px] flex-col justify-between border border-ink/15 px-6 py-6 md:min-h-[150px] md:px-7 md:py-7"
     >
-      🗃️ Research Investigation File
-    </a>
-  )}
+      <p className="type-typewriter text-[10px] uppercase leading-relaxed tracking-[0.08em] text-wax md:text-[11px]">
+        {metric.label}
+      </p>
 
-  {c.pdfUI && (
-    <a
-      href={c.pdfUI}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 rounded-md border border-[#7C1D1D] bg-[#F7F2EA] px-5 py-3 text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#7C1D1D] hover:text-[#F7F2EA]"
-    >
-      📱 UI Design Investigation
-    </a>
-  )}
-
-  {c.website && (
-    <a
-      href={c.website}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 rounded-md border border-[#7C1D1D] bg-[#F7F2EA] px-5 py-3 text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#7C1D1D] hover:text-[#F7F2EA]"
-    >
-      🌍 Visit Live Investigation
-    </a>
-  )}
+      <p className="type-serif text-4xl leading-none text-ink md:text-5xl">
+        {metric.value}
+      </p>
+    </div>
+  ))}
 </div>
-          <div className="relative p-8 md:p-10 texture-leather grain rounded-sm">
-            <div className="absolute top-6 right-6 stamp" style={{ color: "oklch(0.92 0.03 82)" }}>Case Closed</div>
-            <p className="type-serif italic text-lg md:text-xl leading-relaxed text-paper max-w-3xl">
-              {c.verdict}
+
+        {/* PROBLEM, INSIGHT AND DESIGN */}
+        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
+          {/* PROBLEM */}
+          <article className="min-w-0 border-t-2 border-ink pt-5">
+            <div className="flex items-center justify-between gap-3">
+              <p className="type-typewriter text-[10px] uppercase tracking-[0.2em] text-wax">
+                Problem
+              </p>
+
+              <span className="type-typewriter text-[10px] text-ink-soft">
+                01
+              </span>
+            </div>
+
+            <p className="type-serif mt-5 text-lg leading-relaxed text-ink-soft">
+              {c.problem}
             </p>
-            <div className="mt-10 grid sm:grid-cols-3 gap-6 border-t border-paper/20 pt-8">
-              {c.metrics.map(m => (
-                <div key={m.label}>
-                  <div className="type-typewriter text-[10px] uppercase tracking-widest text-gold">{m.label}</div>
-                  <div className="type-serif text-3xl text-paper mt-2">{m.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Section>
+          </article>
 
-        {/* Next case */}
-        <div className="mt-32 border-t border-ink/20 pt-10 flex items-center justify-between flex-wrap gap-6">
-          <div className="type-typewriter uppercase text-[11px] tracking-[0.3em] text-ink-soft">Next in the archive</div>
-          <Link to="/cases/$slug" params={{ slug: next.slug }} className="group text-right">
-            <div className="type-typewriter text-[10px] uppercase tracking-widest text-wax">Case No. {next.no}</div>
-            <div className="type-serif text-2xl md:text-3xl group-hover:text-wax transition-colors flex items-center gap-3">
-              {next.title} <ArrowRight className="h-5 w-5" />
+          {/* INSIGHT */}
+          <article className="min-w-0 border-t-2 border-ink pt-5">
+            <div className="flex items-center justify-between gap-3">
+              <p className="type-typewriter text-[10px] uppercase tracking-[0.2em] text-wax">
+                Insight
+              </p>
+
+              <span className="type-typewriter text-[10px] text-ink-soft">
+                02
+              </span>
             </div>
-          </Link>
+
+            <p className="type-serif mt-5 text-lg leading-relaxed text-ink-soft">
+              {c.insight}
+            </p>
+          </article>
+
+          {/* DESIGN */}
+          <article className="min-w-0 border-t-2 border-ink pt-5">
+            <div className="flex items-center justify-between gap-3">
+              <p className="type-typewriter text-[10px] uppercase tracking-[0.2em] text-wax">
+                Design
+              </p>
+
+              <span className="type-typewriter text-[10px] text-ink-soft">
+                03
+              </span>
+            </div>
+
+            <p className="type-serif mt-5 text-lg leading-relaxed text-ink-soft">
+              {c.design}
+            </p>
+          </article>
+        </div>
+      </section>
+
+      {/* OUTCOME */}
+<section className="mx-auto max-w-6xl px-6 pt-12">
+  {/* SECTION HEADING */}
+  <div className="mb-8">
+    <p className="type-typewriter text-[11px] uppercase tracking-[0.35em] text-wax">
+      The Outcome
+    </p>
+
+    <h2 className="type-serif mt-3 text-4xl text-ink md:text-6xl">
+      The solution.
+    </h2>
+  </div>
+
+  {/* OUTCOME PRESENTATION FRAME */}
+  <div className="texture-paper overflow-hidden border border-ink/15 shadow-paper">
+    <div className="grid lg:grid-cols-[minmax(0,1fr)_260px]">
+      {/* IMAGE */}
+      <div className="min-w-0 bg-black/[0.03] p-3 sm:p-5">
+        <div className="flex aspect-[16/9] w-full items-center justify-center overflow-hidden bg-black/[0.04]">
+          {c.outcomeImage ? (
+            <img
+              src={c.outcomeImage}
+              alt={`${c.title} — final design`}
+              className="h-full w-full object-contain"
+              loading="lazy"
+            />
+          ) : (
+            <div className="px-6 text-center">
+              <p className="type-typewriter text-[10px] uppercase tracking-[0.3em] text-ink-soft">
+                {c.kicker}
+              </p>
+
+              <p className="type-serif mt-3 text-xl text-ink-soft sm:text-2xl">
+                Final product visual
+              </p>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* CAPTION */}
+      <aside className="flex min-w-0 flex-col justify-between border-t border-ink/15 p-6 sm:p-8 lg:border-l lg:border-t-0">
+        <div>
+          <p className="type-typewriter text-[10px] uppercase tracking-[0.25em] text-wax">
+            Final Design
+          </p>
+
+          <h3 className="type-serif mt-4 text-2xl leading-snug text-ink">
+            {c.title}
+          </h3>
+
+          <p className="type-serif mt-4 text-base leading-relaxed text-ink-soft">
+            {c.outcome ?? c.summary}
+          </p>
+        </div>
+
+        <p className="type-typewriter mt-8 border-t border-ink/15 pt-4 text-[10px] uppercase tracking-[0.2em] text-ink-soft">
+          Case No. {c.no} · Final Evidence
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+      {/* FULL INVESTIGATION */}
+      <section className="mx-auto max-w-6xl px-6 pt-12 pb-20 text-center">
+        <div className="border-t border-ink/15 pt-20 sm:pt-24">
+          <p className="type-typewriter text-[10px] uppercase tracking-[0.3em] text-wax sm:text-[11px] sm:tracking-[0.35em]">
+            Want the full investigation?
+          </p>
+
+          <h2 className="type-serif mt-4 text-4xl tracking-tight text-ink sm:text-5xl md:text-6xl">
+            Read the complete case study.
+          </h2>
+
+          <p className="type-serif mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">
+            Research, evidence, iterations, design decisions and the complete
+            investigation are documented in the full case study.
+          </p>
+
+          {/* CASE STUDY LINKS */}
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            {c.pdfResearch && (
+              <a
+                href={c.pdfResearch}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center border border-[#7C1D1D] px-7 py-4 type-typewriter text-xs uppercase tracking-[0.2em] text-[#7C1D1D] transition-all duration-300 hover:bg-[#7C1D1D] hover:text-[#F7F2EA]"
+              >
+                Research Investigation File
+                <ExternalLink className="ml-2 h-3.5 w-3.5" />
+              </a>
+            )}
+
+            {c.website && (
+              <a
+                href={c.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-[#7C1D1D] px-7 py-4 type-typewriter text-xs uppercase tracking-[0.2em] text-[#F7F2EA] transition-all duration-300 hover:bg-[#5f1515]"
+              >
+                View Full Case Study
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* NEXT CASE */}
+      <section className="mx-auto max-w-6xl px-6 pb-24">
+        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-ink/20 pt-10">
+          <p className="type-typewriter text-[10px] uppercase tracking-[0.3em] text-ink-soft sm:text-[11px]">
+            Next in the archive
+          </p>
+
+          <Link
+            to="/cases/$slug"
+            params={{ slug: next.slug }}
+            className="group min-w-0 text-right"
+          >
+            <p className="type-typewriter text-[10px] uppercase tracking-widest text-wax">
+              Case No. {next.no}
+            </p>
+
+            <span className="type-serif mt-2 inline-flex items-center justify-end gap-3 text-xl text-ink transition-colors group-hover:text-wax sm:text-2xl md:text-3xl">
+              {next.title}
+              <ArrowRight className="h-5 w-5 shrink-0" />
+            </span>
+          </Link>
+        </div>
+      </section>
 
       <BureauFooter />
     </div>
