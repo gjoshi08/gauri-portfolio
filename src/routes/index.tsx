@@ -4,16 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { SealedEnvelope } from "@/Components/envelope";
 import { BureauNav, BureauFooter } from "@/Components/bureau-chrome";
-import { EvidenceFolder } from "@/Components/bureau";
 import { cases } from "@/lib/cases";
 import {
   ArrowRight,
   ArrowUpRight,
   Fingerprint,
   GraduationCap,
-  MapPin,
   BriefcaseBusiness,
-  Mail,
   UserRound,
 } from "lucide-react";
 import { StackedProjects } from "@/Components/stacked-projects";
@@ -220,6 +217,7 @@ function InvestigationBoard() {
             Altum Infotech
           </p>
         </Link>
+        
 
         {/* Philosophy strip */}
         <div className="absolute right-[5%] bottom-[7%] z-[7] w-[27%] rotate-[4deg] border border-[#a63d32] bg-[#f2e4c9] px-2 py-2 shadow-[2px_4px_7px_rgba(55,35,20,.16)] sm:px-2.5">
@@ -348,11 +346,177 @@ function Home() {
             </section>
 
             <div className="mt-12 md:mt-16">
-  <StackedProjects projects={cases.slice(0, 3)} />
-</div>
+              <StackedProjects projects={cases.slice(0, 3)} />
+            </div>
+
+            {/* TESTIMONIALS — kept outside the InvestigationBoard */}
+            <section className="mx-auto mt-24 max-w-7xl px-6 md:mt-32">
+              <div className="mb-10 border-b border-ink/15 pb-6">
+                <div className="type-typewriter text-[10px] uppercase tracking-[0.35em] text-wax">
+                  Witness Statements · 001–003
+                </div>
+                <div className="mt-4 grid gap-5 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+                  <h2 className="type-serif text-4xl leading-tight text-ink md:text-6xl">
+                    The people<br />
+                    <span className="italic">behind the evidence.</span>
+                  </h2>
+                  <p className="max-w-md leading-relaxed text-ink-soft">
+                    Every investigation leaves an impression. These statements record the people
+                    I've collaborated with and learned from along the way.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-3">
+                {[
+                  {
+                    number: "001",
+                    role: "PROJECT COLLABORATOR",
+                    quote: "Replace this with a genuine testimonial about your collaboration.",
+                    name: "Collaborator's Name",
+                  },
+                  {
+                    number: "002",
+                    role: "INTERNSHIP COLLEAGUE",
+                    quote: "Replace this with a genuine testimonial about your work and approach.",
+                    name: "Colleague's Name",
+                  },
+                  {
+                    number: "003",
+                    role: "FACULTY / MENTOR",
+                    quote: "Replace this with a genuine testimonial about your growth as a designer.",
+                    name: "Professor's Name",
+                  },
+                ].map((item, index) => (
+                  <motion.article
+                    key={item.number}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    whileHover={{ y: -4, rotate: index === 1 ? 0.4 : -0.4 }}
+                    transition={{ duration: 0.35, ease: easeApple }}
+                    className="relative flex min-h-[250px] flex-col border border-ink/15 bg-[#eee4d0] p-6 shadow-[0_5px_14px_rgba(47,30,18,0.06)] md:p-7"
+                  >
+                    <div className="absolute right-5 top-5 h-3 w-3 rounded-full border border-[#d5c4a5] bg-[#963f34] shadow-sm" />
+                    <div className="type-typewriter text-[9px] uppercase tracking-[0.25em] text-wax">
+                      Statement No. {item.number}
+                    </div>
+                    <div className="mt-5 font-serif text-4xl italic text-[#963f34]">“</div>
+                    <blockquote className="font-serif text-xl italic leading-relaxed text-ink">
+                      {item.quote}
+                    </blockquote>
+                    <div className="mt-auto border-t border-dashed border-ink/20 pt-5">
+                      <div className="type-typewriter text-[9px] uppercase tracking-[0.15em] text-ink-soft">
+                        {item.role}
+                      </div>
+                      <div className="mt-2 font-serif text-lg text-ink">{item.name}</div>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+              <div className="mt-4 text-right type-typewriter text-[9px] uppercase tracking-[0.2em] text-ink-soft">
+                Statements recorded · Bureau archive
+              </div>
+            </section>
+
+            {/* OTHER EXPLORATIONS — experimental work */}
+            <section className="mx-auto mt-24 max-w-7xl px-6 md:mt-32">
+              <div className="mb-10 border-b border-ink/15 pb-6">
+                <div className="type-typewriter text-[10px] uppercase tracking-[0.35em] text-wax">
+                  Other Explorations · Experimental Evidence
+                </div>
+                <div className="mt-4 grid gap-5 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+                  <h2 className="type-serif text-4xl leading-tight text-ink md:text-6xl">
+                    Not every question<br />
+                    <span className="italic">becomes a case file.</span>
+                  </h2>
+                  <p className="max-w-md leading-relaxed text-ink-soft">
+                    Experiments with emerging technology, immersive worlds, and interactions
+                    that move beyond the conventional screen.
+                  </p>
+                </div>
+              </div>
+
+              {[
+                {
+                  number: "EXHIBIT 01",
+                  title: "Worlds Beyond the Screen",
+                  category: "IMMERSIVE EXPLORATION",
+                  description: "An exploration of immersive experiences, spatial storytelling, and presence.",
+                  video: "/videos/immersive-exploration.mp4",
+                },
+                {
+                  number: "EXHIBIT 02",
+                  title: "Reality, Reimagined",
+                  category: "AUGMENTED REALITY",
+                  description: "An experiment exploring how digital interactions can extend the physical world.",
+                  video: "/videos/ar-exploration.mp4",
+                },
+                {
+                  number: "EXHIBIT 03",
+                  title: "When Light Becomes Interaction",
+                  category: "LIGHT & ROBOTICS",
+                  description: "An experimental project exploring movement, light, and responsive behaviour.",
+                  video: "/videos/light-flowing-robot.mp4",
+                },
+              ].map((project, index) => (
+                <motion.article
+                  key={project.number}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.12 }}
+                  transition={{ duration: 0.5, delay: index * 0.07, ease: easeApple }}
+                  className={`relative mb-8 border border-ink/15 bg-[#eee4d0] shadow-[0_7px_18px_rgba(47,30,18,0.07)] ${index === 1 ? "md:ml-[8%]" : ""}`}
+                >
+                  <div className="absolute -top-3 left-7 z-10 border border-[#80684d]/30 bg-[#d8c4a3] px-4 py-1.5 type-typewriter text-[9px] uppercase tracking-[0.2em] text-ink">
+                    {project.number}
+                  </div>
+                  <div className="grid md:grid-cols-[1.15fr_0.85fr]">
+                    <div className="relative min-w-0 border-b border-ink/10 bg-[#28231f] md:border-b-0 md:border-r">
+                      <video
+                        className="aspect-video w-full object-contain"
+                        controls
+                        playsInline
+                        preload="metadata"
+                      >
+                        <source src={project.video} type="video/mp4" />
+                        Your browser does not support video playback.
+                      </video>
+                      <div className="pointer-events-none absolute left-4 top-4 bg-[#eee4d0]/90 px-3 py-2 type-typewriter text-[9px] uppercase tracking-[0.15em] text-ink">
+                        Evidence recording
+                      </div>
+                    </div>
+                    <div className="flex flex-col justify-center p-6 md:p-9">
+                      <div className="type-typewriter text-[9px] uppercase tracking-[0.25em] text-wax">
+                        {project.category}
+                      </div>
+                      <h3 className="type-serif mt-4 text-3xl leading-tight text-ink md:text-4xl">
+                        {project.title}
+                      </h3>
+                      <p className="mt-4 leading-relaxed text-ink-soft">{project.description}</p>
+                      <div className="mt-7 flex items-center gap-3 border-t border-dashed border-ink/20 pt-5">
+                        <Fingerprint className="h-5 w-5 shrink-0 text-wax" />
+                        <span className="type-typewriter text-[9px] uppercase tracking-[0.16em] text-ink-soft">
+                          Experimental evidence · Filed for observation
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+
+              <div className="mt-8 flex items-center justify-between gap-4 border-t border-ink/15 pt-5">
+                <span className="type-typewriter text-[9px] uppercase tracking-[0.2em] text-ink-soft">
+                  Three experiments · One curious mind
+                </span>
+                <span className="type-typewriter text-[9px] uppercase tracking-[0.2em] text-wax">
+                  End of experimental archive
+                </span>
+              </div>
+            </section>
 
             {/* Philosophy strip */}
-            <section className="mx-auto mt-28 max-w-5xl px-6 text-center md:mt-32">
+            <section className="mx-auto mt-20 max-w-5xl px-6 text-center md:mt-32">
               <div className="type-typewriter text-[11px] uppercase tracking-[0.35em] text-wax">
                 Standing Order · No. 1
               </div>

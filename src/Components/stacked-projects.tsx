@@ -170,9 +170,9 @@ export function StackedProjects({
 
   return (
     <section
-      ref={sectionRef}
-      className="relative mx-auto max-w-7xl px-5 pb-24 md:px-8"
-    >
+  ref={sectionRef}
+  className="relative mx-auto max-w-7xl px-5 pb-8 md:px-8"
+>
       {/* Section heading */}
       <div className="mb-12 flex flex-col justify-between gap-5 border-b border-ink/15 pb-7 md:flex-row md:items-end">
         <div>
