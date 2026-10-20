@@ -36,50 +36,118 @@ function About() {
     <div className="min-h-screen texture-paper grain-fine">
       <BureauNav current="/about" />
 
-      {/* Dossier hero */}
-      <section className="mx-auto max-w-5xl px-6 pt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: easeApple }}
-          className="relative texture-paper grainfine shadow-paper p-10 md:p-16 rounded-sm"
-        >
-          <div className="absolute top-6 right-6 stamp text-[10px]">DESIGN CLEARANCE</div>
-          <div className="grid md:grid-cols-[auto_1fr] gap-10 items-start">
-            <div className="w-40 aspect\[3/4] shadow-object relative overflow-hidden" style={{
-              background: "linear-gradient(135deg, oklch(0.45 0.05 60), oklch(0.28 0.03 60))",
-            }}>
-              <div className="absolute inset-3 border border-paper/30" />
-              <div className="absolute bottom-2 left-2 right-2 type-typewriter text-[9px] text-paper/70 uppercase tracking-widest">ID · 0001 · DIB</div>
-            </div>
-            <div>
-              <div className="type-typewriter uppercase text-[11px] tracking-[0.35em] text-ink-soft">
-                Chief Investigator's Profile
-              </div>
-              <h1 className="type-serif text-5xl md:text-7xl leading-[0.95] mt-3">
-                Gauri <span className="italic">Joshi</span>
-              </h1>
-              <p className="mt-6 type-serif italic text-xl text-ink-soft leading-relaxed max-w-lg">
-                UX designer who treats every project as an unsolved case — and refuses to close the file until the user's problem is genuinely gone.
-              </p>
-              <div className="mt-8 grid grid-cols-3 gap-6 border-t border-ink/15 pt-6 max-w-xl">
-                <div>
-                  <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">Cases Closed</div>
-                  <div className="type-serif text-3xl mt-1">6+</div>
-                </div>
-                <div>
-                  <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">Design Tools</div>
-                  <div className="type-serif text-3xl mt-1">8+</div>
-                </div>
-                <div>
-                  <div className="type-typewriter text-[10px] uppercase tracking-widest text-ink-soft">Current Role</div>
-                  <div className="type-serif text-3xl mt-1">UX Designer</div>
-                </div>
-              </div>
+      {/* ABOUT — INVESTIGATOR PROFILE */}
+<section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+  <div className="relative border border-ink/15 bg-[#eee4d0] p-6 shadow-[0_8px_24px_rgba(47,30,18,0.08)] md:p-12 lg:p-16">
+
+    {/* TWO-COLUMN PROFILE LAYOUT */}
+    <div className="grid items-center gap-10 md:grid-cols-[260px_minmax(0,1fr)] md:gap-14">
+
+      {/* LEFT COLUMN — PINNED PHOTOGRAPH */}
+      <div className="relative mx-auto w-full max-w-[260px] translate-y-6 rotate-[-3deg] transition-transform duration-300 hover:rotate-0 md:translate-y-6">
+
+        {/* Photograph backing */}
+        <div className="relative border border-[#c9b695] bg-[#eee3cc] p-3 pb-8 shadow-[3px_8px_16px_rgba(47,30,18,0.18)]">
+
+          {/* Red pushpin */}
+          <div className="absolute left-1/2 top-[-9px] z-20 h-5 w-5 -translate-x-1/2 rounded-full border-2 border-[#c9a78a] bg-[#963f34] shadow-[1px_3px_4px_rgba(47,30,18,0.3)]">
+            <div className="absolute left-[4px] top-[3px] h-1 w-1 rounded-full bg-white/60" />
+          </div>
+
+          {/* Evidence label */}
+          <div className="mb-3 flex items-center justify-between">
+            <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-[#963f34]">
+              Exhibit 01
+            </span>
+
+            <span className="font-mono text-[8px] uppercase tracking-widest text-[#75583c]">
+              Subject
+            </span>
+          </div>
+
+          {/* Portrait */}
+          <div className="aspect-[4/5] overflow-hidden border-[5px] border-white bg-[#d8c7a8] shadow-inner">
+            <img
+              src="/gauri-portrait.jpg"
+              alt="Gauri Joshi — Chief Investigator"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* RIGHT COLUMN — PROFILE INFORMATION */}
+      <div className="relative">
+
+        {/* Design clearance stamp */}
+        <div className="mb-8 flex justify-end">
+          <div className="rotate-[-6deg] border border-[#963f34] p-1">
+            <div className="border border-[#963f34]/60 px-4 py-2 type-typewriter text-[9px] uppercase tracking-[0.2em] text-[#963f34]">
+              PROFILE VERIFIED
             </div>
           </div>
-        </motion.div>
-      </section>
+        </div>
 
-      <div className="mx-auto max-w-5xl px-6">
+        {/* Section label */}
+        <p className="type-typewriter text-[10px] uppercase tracking-[0.3em] text-red-800">
+          Chief Investigator's Profile
+        </p>
+
+        {/* Name */}
+        <h1 className="mt-5 font-serif text-5xl leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+          Gauri <em>Joshi</em>
+        </h1>
+
+        {/* Introduction */}
+        <p className="mt-5 max-w-xl font-serif text-lg italic leading-relaxed text-ink sm:text-xl">
+          UX designer who treats every project as an unsolved case and
+          refuses to close the file until the user's problem is genuinely gone.
+        </p>
+
+        {/* Divider */}
+        <div className="my-8 border-t border-ink/20" />
+
+        {/* Statistics */}
+        <div className="grid grid-cols-3 gap-4 sm:gap-6">
+
+          <div>
+            <p className="type-typewriter text-[8px] uppercase tracking-[0.12em] text-ink-soft sm:text-[10px]">
+              Cases Closed
+            </p>
+
+            <p className="mt-2 font-serif text-3xl text-ink sm:text-4xl">
+              6+
+            </p>
+          </div>
+
+          <div>
+            <p className="type-typewriter text-[8px] uppercase tracking-[0.12em] text-ink-soft sm:text-[10px]">
+              Design Tools
+            </p>
+
+            <p className="mt-2 font-serif text-3xl text-ink sm:text-4xl">
+              8+
+            </p>
+          </div>
+
+          <div>
+            <p className="type-typewriter text-[8px] uppercase tracking-[0.12em] text-ink-soft sm:text-[10px]">
+              Current Role
+            </p>
+
+            <p className="mt-2 font-serif text-xl leading-tight text-ink sm:text-2xl">
+              UX Designer
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+      <div className="mx-auto max-w-5xl px-6 -mt-8">
         <Block label="I · Mission" title="Investigate the user. Design the answer.">
           I believe every successful digital product begins by understanding people rather than assumptions.My process combines UX research, interaction design, service design and visual thinking to uncover real user needs and translate them into intuitive digital experiences.Every project is approached like an investigation where evidence guides every design decision.
         </Block>
@@ -112,16 +180,17 @@ function About() {
         </Block>
 
         <Block label="V · Strengths" title="Tools of the trade.">
-          Research design · Interviewing · Journey mapping · Information architecture · Interaction design · Prototyping · Design systems · Accessibility (WCAG 2.2) · Workshop facilitation
+          Research design · Interviewing · Journey mapping · Information architecture · Interaction design · Prototyping · Design systems
         </Block>
 
         <Block label="VI · Instruments" title="Standard kit.">
-          Figma · Framer · Adobe Photoshop · Adobe Illustrator · Adobe Indesign · a good notebook and a decent pen.
+          Figma · Framer · Adobe Photoshop · Adobe Illustrator · Adobe Indesign · Autocad · Sketchup · Enscape · a good notebook and a decent pen.
         </Block>
 
         <Block label="VII · Fun Facts" title="Off the record.">
           Watches three detective movies a month. Drinks her coffee black. Believes the best design critique happens on a long walk.
         </Block>
+      
       </div>
 
       <BureauFooter />

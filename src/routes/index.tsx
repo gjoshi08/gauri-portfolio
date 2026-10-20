@@ -5,9 +5,12 @@ import { useState } from "react";
 import { SealedEnvelope } from "@/Components/envelope";
 import { BureauNav, BureauFooter } from "@/Components/bureau-chrome";
 import { cases } from "@/lib/cases";
+import { PinnedEvidenceLinks } from "@/Components/PinnedEvidenceLinks";
 import {
   ArrowRight,
   ArrowUpRight,
+  Linkedin,
+  FileText,
   Fingerprint,
   GraduationCap,
   BriefcaseBusiness,
@@ -106,7 +109,7 @@ function InvestigationBoard() {
                 event.currentTarget.style.display = "none";
               }}
             />
-            <UserRound className="absolute h-7 w-7 stroke-[1.1]" />
+
           </div>
           <p className="mt-1.5 text-center font-mono text-[6px] uppercase tracking-[0.12em] text-[#75583c] sm:text-[7px]">
             Chief Investigator
@@ -289,61 +292,117 @@ function Home() {
               </div>
             </section>
 
-            {/* BOARD + CASE NOTES: matched heights */}
-            <section className="mx-auto max-w-7xl px-6">
-              <div className="grid items-stretch gap-6 lg:grid-cols-[1.15fr_0.9fr] lg:gap-7">
-                <div className="min-w-0">
-                  <InvestigationBoard />
-                  <div className="mt-2 flex items-center justify-between gap-3 font-mono text-[8px] uppercase tracking-[0.18em] text-ink-soft md:text-[9px]">
-                    <span>Fig. 01 · Personal dossier</span>
-                    <span>Examine the evidence</span>
-                  </div>
-                </div>
+           {/* BOARD + CASE NOTES */}
+<section className="mx-auto max-w-7xl px-6">
+  <div className="grid items-stretch gap-6 lg:grid-cols-[1.15fr_0.9fr] lg:gap-7">
 
-                {/* Case Notes styling and typography intentionally preserved. */}
-                <aside className="flex min-h-[468px] flex-col rounded-md border border-ink/10 bg-paper/70 p-6 shadow-[0_4px_10px_rgba(47,30,18,0.07)] md:p-8">
-                  <div className="type-typewriter mb-5 text-[10px] uppercase tracking-[0.28em] text-wax">
-                    Case Notes
-                  </div>
-                  <div className="space-y-5 text-ink-soft">
-                    <p className="type-serif text-2xl italic text-ink">
-                      The bureau keeps the records close and the stories honest.
-                    </p>
-                    <p className="leading-relaxed">
-                      Every object carries a trail, and every trail points back to the people,
-                      patterns, and decisions that shaped the work.
-                    </p>
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {[
-                        "Pattern mapping",
-                        "User interviews",
-                        "System signals",
-                        "Evidence review",
-                      ].map((label) => (
-                        <span
-                          key={label}
-                          className="type-typewriter border border-ink/10 bg-ink/5 px-2 py-2 text-[9px] uppercase tracking-[0.2em]"
-                        >
-                          {label}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mt-auto border-t border-dashed border-ink/15 pt-5">
-                    <p className="type-serif flex items-start gap-3 text-lg italic text-ink-soft">
-                      <Fingerprint className="mt-1 h-5 w-5 shrink-0 text-wax" />
-                      “Look closer. Ask why. Design with intention.”
-                    </p>
-                    <Link
-                      to="/about"
-                      className="type-typewriter mt-4 inline-flex items-center gap-2 border-b border-wax pb-1 text-[10px] uppercase tracking-[0.22em] text-wax transition-colors hover:text-ink"
-                    >
-                      Meet the investigator <ArrowUpRight size={13} />
-                    </Link>
-                  </div>
-                </aside>
-              </div>
-            </section>
+    {/* LEFT: INVESTIGATION BOARD */}
+    <div className="min-w-0">
+      <InvestigationBoard />
+
+      <div className="mt-2 flex items-center justify-between gap-3 font-mono text-[8px] uppercase tracking-[0.18em] text-ink-soft md:text-[9px]">
+        <span>Fig. 01 · Personal dossier</span>
+        <span>Examine the evidence</span>
+      </div>
+    </div>
+
+    {/* RIGHT: CASE NOTES + EXTERNAL RECORDS */}
+    <aside className="flex min-h-[468px] flex-col rounded-md border border-ink/10 bg-paper/70 p-6 shadow-[0_4px_10px_rgba(47,30,18,0.07)] md:p-8">
+
+      {/* Case Notes heading */}
+      <div className="type-typewriter mb-5 text-[10px] uppercase tracking-[0.28em] text-wax">
+        Case Notes
+      </div>
+
+      {/* Existing Case Notes content */}
+      <div className="space-y-5 text-ink-soft">
+
+        <p className="type-serif text-2xl italic text-ink">
+          The bureau keeps the records close and the stories honest.
+        </p>
+
+        <p className="leading-relaxed">
+          Every object carries a trail, and every trail points back to the
+          people, patterns, and decisions that shaped the work.
+        </p>
+
+        <div className="flex flex-wrap gap-2 pt-1">
+          {[
+            "Pattern mapping",
+            "User interviews",
+            "System signals",
+            "Evidence review",
+          ].map((label) => (
+            <span
+              key={label}
+              className="type-typewriter border border-ink/10 bg-ink/5 px-2 py-2 text-[9px] uppercase tracking-[0.2em]"
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Closing statement */}
+      <div className="mt-7 border-t border-dashed border-ink/15 pt-5">
+
+        <p className="type-serif flex items-start gap-3 text-lg italic text-ink-soft">
+          <Fingerprint className="mt-1 h-5 w-5 shrink-0 text-wax" />
+          “Look closer. Ask why. Design with intention.”
+        </p>
+
+        <Link
+          to="/about"
+          className="type-typewriter mt-4 inline-flex items-center gap-2 border-b border-wax pb-1 text-[10px] uppercase tracking-[0.22em] text-wax transition-colors hover:text-ink"
+        >
+          Meet the investigator <ArrowUpRight size={13} />
+        </Link>
+      </div>
+
+      {/* EXTERNAL LINKS — LOGOS ONLY */}
+<div className="mt-6 flex items-center gap-5 border-t border-dashed border-ink/20 pt-5">
+
+  {/* LinkedIn */}
+  <a
+    href="https://linkedin.com/in/gaurijoshi23"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+    title="LinkedIn"
+    className="text-ink-soft transition-all duration-200 hover:-translate-y-1 hover:text-[#0A66C2]"
+  >
+    <Linkedin size={21} strokeWidth={1.6} />
+  </a>
+
+  {/* Behance */}
+  <a
+    href="https://behance.net/gaurijoshi7"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Behance"
+    title="Behance"
+    className="font-sans text-lg font-bold text-ink-soft transition-all duration-200 hover:-translate-y-1 hover:text-[#1769FF]"
+  >
+    Be
+  </a>
+
+  {/* Resume */}
+  <a
+    href="/resume.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Resume"
+    title="Resume"
+    className="text-ink-soft transition-all duration-200 hover:-translate-y-1 hover:text-wax"
+  >
+    <FileText size={21} strokeWidth={1.6} />
+  </a>
+
+</div>
+
+    </aside>
+  </div>
+</section>
 
             <div className="mt-12 md:mt-16">
               <StackedProjects projects={cases.slice(0, 3)} />
@@ -372,20 +431,20 @@ function Home() {
                   {
                     number: "001",
                     role: "PROJECT COLLABORATOR",
-                    quote: "Replace this with a genuine testimonial about your collaboration.",
-                    name: "Collaborator's Name",
+                    quote: "What stood out about working with Gauri was how much thought she put into the experience behind the design. She was always willing to explore different directions, question our initial assumptions, and push the work beyond the obvious solution. Collaborating with her made the process more thoughtful and helped us look at the problem from different perspectives.",
+                    name: "Riddhi Patel",
                   },
                   {
                     number: "002",
-                    role: "INTERNSHIP COLLEAGUE",
-                    quote: "Replace this with a genuine testimonial about your work and approach.",
-                    name: "Colleague's Name",
+                    role: "INTERNSHIP SUPERVISOR",
+                    quote: "During her internship at Altum Infotech, Gauri demonstrated a thoughtful approach to UI/UX design, with strong attention to detail and a willingness to learn. She was receptive to feedback, collaborated well with the team, and consistently worked to align her designs with project requirements. Her curiosity and commitment to improving her work made her a valuable part of the team.",
+                    name: "Rajesh Vegad, Founder, Altum Infotech",
                   },
                   {
                     number: "003",
                     role: "FACULTY / MENTOR",
-                    quote: "Replace this with a genuine testimonial about your growth as a designer.",
-                    name: "Professor's Name",
+                    quote: "Gauri brings curiosity and a willingness to look beyond the surface of a design problem. She is interested not only in how an interface looks, but also in the reasoning behind the decisions that shape it. Her willingness to explore ideas, question assumptions, and refine her work reflects a growing maturity in her approach to design.",
+                    name: "Professor Suraj Joshi",
                   },
                 ].map((item, index) => (
                   <motion.article
@@ -402,7 +461,7 @@ function Home() {
                       Statement No. {item.number}
                     </div>
                     <div className="mt-5 font-serif text-4xl italic text-[#963f34]">“</div>
-                    <blockquote className="font-serif text-xl italic leading-relaxed text-ink">
+                    <blockquote className="font-serif text-base italic leading-[1.65] text-ink md:text-[17px]">
                       {item.quote}
                     </blockquote>
                     <div className="mt-auto border-t border-dashed border-ink/20 pt-5">

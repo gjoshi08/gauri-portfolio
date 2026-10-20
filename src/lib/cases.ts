@@ -21,7 +21,10 @@ export type CaseFile = {
   website?: string;
   pdfResearch?: string;
   pdfUI?: string;
-  behance?: string;
+  behance?: string | {
+  label: string;
+  url: string;
+}[];
   outcomeImage?: string;
   metrics?: {
     label: string;
@@ -41,8 +44,16 @@ export const cases: CaseFile[] = [
   client: "Academic Design Project",
   role: "UX Researcher & Product Designer",
 
-  pdfResearch: "/case-studies/saarthi-research.pdf",
-  pdfUI: "/case-studies/saarthi-ui.pdf",
+  behance: [
+  {
+    label: "UX Research Case Study",
+    url: "https://www.behance.net/gallery/245306687/Saarthi-UX-Research-Case-Study",
+  },
+  {
+    label: "UI Design Case Study",
+    url: "https://www.behance.net/gallery/250468463/SAARTHI-A-Guided-Public-Service-Experience",
+  },
+],
 
   tags: [
     "UX Research",
@@ -81,7 +92,7 @@ export const cases: CaseFile[] = [
      client: "Academic Design Project",
      role: "UX Researcher & Interaction Designer",
 
-     pdfResearch: "/case-studies/paytm chatbot.pdf",
+     behance: "https://www.behance.net/gallery/243233585/Designing-Reassurance-in-Digital-Payments",
 
      tags: [
        "Conversational UX",
@@ -162,7 +173,7 @@ export const cases: CaseFile[] = [
 
     collaborators: "Conducted as a group investigation with a multidisciplinary design team.",
 
-    pdfResearch: "/case-studies/human-factors-dining.pdf",
+    behance: "https://www.behance.net/gallery/256717319/In-Table-Rethinking-the-Social-Dining-Experience",
 
     tags: [
       "Human Factors",
